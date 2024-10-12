@@ -7,6 +7,9 @@ This projects aims to create a simple server which restores functioonality to th
 - Posting (only text)
 - Trending
 
+# Demo URL
+http://tweet.sfproj.xyz
+
 # Setup
 TBA
 
