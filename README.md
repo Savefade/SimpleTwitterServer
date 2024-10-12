@@ -1,11 +1,11 @@
 # SimpleTwitterServer
 This projects aims to create a simple server which restores functioonality to the iOS, Android and WP apps. (Can also be used to develop apps for the still operational v1.1 API)
 # Supported features
-- Login & Register (0%, development to begin on october 10th)
-- Timeline
-- Profile
-- Posting (only text)
-- Trending
+- Login & Register 99%
+- Timeline 0%
+- Profile 0%
+- Posting (only text) 0%
+- Trending 0%
 
 # Demo URL
 http://tweet.sfproj.xyz
