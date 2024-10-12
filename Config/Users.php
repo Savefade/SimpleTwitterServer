@@ -1,0 +1,3 @@
+<?php
+$isRegistrationEnabled = true;
+$verifiedUsers = [];
