@@ -1,0 +1,7 @@
+RewriteEngine On
+RewriteBase /
+RewriteRule ^oauth/(.+)$ API/Oauth/$1.php [L]
+RewriteRule ^mobile_client_api/(.+)$ API/MobileClientAPI/$1.php [L]
+RewriteRule ^1/users/(\d+).json$ API/v1/Users/$1.php [L]
+
+RewriteRule ^1.1/account/verify_credentials.json$ API/v1.1/account/verify_credentials.php [L]
