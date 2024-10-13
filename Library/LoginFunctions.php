@@ -26,3 +26,19 @@ function GetUserData($username){
 	if($DBResult->num_rows == 0)	return false;
 	return $DBResult->fetch_assoc();
 }
+
+function GetUserDataWithOAuthToken($token){
+	include "../../../Config/DatabaseConnection.php";
+	
+	$DBGetAccount = $DBReq->prepare("SELECT * FROM accounts WHERE Token = ?;");
+	$DBGetAccount->bind_param("s", $token);
+	$DBGetAccount->execute();
+	$DBResult = $DBGetAccount->get_result();
+	if($DBResult->num_rows == 0)	returnPasswordError();
+	return $DBResult->fetch_assoc();
+}
+
+function returnPasswordError(){
+	http_response_code(401);
+	exit;
+}
