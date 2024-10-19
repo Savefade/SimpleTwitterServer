@@ -2,9 +2,9 @@
 This projects aims to create a simple server which restores functioonality to the iOS, Android and WP apps. (Can also be used to develop apps for the still operational v1.1 API)
 # Supported features
 - Login & Register 99%
-- Timeline 0%
+- Timeline 10% (only shows the latest 20 posts without showing proper user data)
 - Profile 0%
-- Posting (only text) 0%
+- Posting (only text) 50%
 - Trending 0%
 
 # Demo URL
