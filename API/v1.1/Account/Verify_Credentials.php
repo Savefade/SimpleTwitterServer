@@ -2,17 +2,9 @@
 include  "../../../Config/Maintenance.php";
 include  "../../../Config/DatabaseConnection.php";
 include  "../../../Library/LoginFunctions.php";
+include  "../../../Library/Middleware.php";
 
-if(!isset(getallheaders()["Authorization"])){
-	returnPasswordError(401);
-}
-
-parse_str(str_replace([', ', "OAuth", '"'], ['&', '', ''], getallheaders()["Authorization"]), $getOauthData);
-if(!isset($getOauthData["oauth_token"])){
-	returnPasswordError(401);
-}
-
-$DBData = GetUserDataWithOAuthToken($getOauthData["oauth_token"]);
+$getUserData = checkAuth();
 
 die(json_encode(array(
     "contributors_enabled"=> true,
