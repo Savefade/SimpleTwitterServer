@@ -17,5 +17,5 @@ TBA
 You can use the microblogging URL in the login page on iOS.
 
 # Credits
-- API Documentation:
+- API Documentation: https://web.archive.org/web/20120419100225/https://dev.twitter.com/docs/api/1/post/statuses/update
 - 
