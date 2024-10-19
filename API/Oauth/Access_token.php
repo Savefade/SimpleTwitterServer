@@ -23,8 +23,3 @@ $token = $token = sha1(time() . $DBData["Salt"]);
 updateToken($DBData, $token);
 
 die("oauth_token=$token&oauth_token_secret=$token&user_id=" . $DBData["ID"] ."&screen_name=" . $DBData["Username"]);
-
-function returnPasswordError(){
-	http_response_code(401);
-	exit;
-}
