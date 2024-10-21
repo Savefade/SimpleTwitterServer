@@ -7,7 +7,8 @@ This projects aims to create a simple server which restores functioonality to th
 - Posting (only text) 50%
 - Trending 0%
 
-# Demo URL
+# Live demo
+You can try the service on this endpoint: 
 http://tweet.sfproj.xyz
 
 # Setup
