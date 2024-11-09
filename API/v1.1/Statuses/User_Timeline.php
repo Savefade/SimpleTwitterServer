@@ -6,26 +6,26 @@ include  "../../../Library/UserListFunctions.php";
 
 $GetUserData = checkAuth();
 
-$tweetsDB = array();
-$postersID = array();
+if(!isset($_GET["screen_name"])){
+	if(!isset($_GET["user_id"]))
+	exit(-1);
+}
+
+$tweets = array();
 $tweetsResponse = array();
 
-$RetrieveTweets = $DBReq->prepare("SELECT * FROM `tweets` ORDER BY `tweets`.`Timestamp` ASC LIMIT 20;");
+$posterUserData = (isset($_GET["screen_name"]))? GetUserData($_GET["screen_name"]) : ((isset($_GET["user_id"]))? GetUserDataWithUserID($_GET["user_id"]) : exit);
+
+$RetrieveTweets = $DBReq->prepare("SELECT * FROM `tweets` WHERE PosterUserID = ? ORDER BY `tweets`.`Timestamp` ASC LIMIT 20;");
+$RetrieveTweets->bind_param("s", $posterUserData["ID"]);
 $RetrieveTweets->execute();
 $DBResult = $RetrieveTweets->get_result();
 
 while($tweetData = mysqli_fetch_assoc($DBResult)){
-	$tweetsDB[] = $tweetData;
-	$postersID[] = $tweetData["PosterUserID"];
-}
-
-$postersUserData = getUsersByID(implode(" ,", $postersID));
-
-foreach($tweetsDB as $tweet){
-	$tweetsResponse[] =  array (
+	$tweets[] =  array (
     'coordinates' => NULL,
     'favorited' => false,
-    'created_at' => date('D M j H:i:s O Y', $tweet["Timestamp"]),
+    'created_at' => date('D M j H:i:s O Y', $tweetData["Timestamp"]),
     'truncated' => false,
     'entities' => 
     array (
@@ -60,17 +60,17 @@ foreach($tweetsDB as $tweet){
        // ),
       //),
     ),
-    'text' => $tweet["Text"],
+    'text' => $tweetData["Text"],
     'annotations' => NULL,
     'contributors' => NULL,
-    'id' => $tweet["ID"],
+    'id' => $tweetData["ID"],
     'geo' => NULL,
     'in_reply_to_user_id' => NULL,
     'place' => NULL,
     'in_reply_to_screen_name' => NULL,
     'user' => 
     array (
-      'name' => $postersUserData[$tweet["PosterUserID"]]["Username"],
+      'name' => $posterUserData["Username"],
       'profile_sidebar_border_color' => 'AD0066',
       'profile_background_tile' => false,
       'profile_sidebar_fill_color' => 'AD0066',
@@ -83,7 +83,7 @@ foreach($tweetsDB as $tweet){
       'favourites_count' => 0,
       'contributors_enabled' => false,
       'utc_offset' => -28800,
-      'id' => $tweet["PosterUserID"],
+      'id' => $tweetData["PosterUserID"],
       'profile_use_background_image' => true,
       'profile_text_color' => '000000',
       'protected' => false,
@@ -91,7 +91,7 @@ foreach($tweetsDB as $tweet){
       'lang' => 'en',
       'notifications' => false,
       'time_zone' => 'Pacific Time (US & Canada)',
-      'verified' => $postersUserData["IsVerified"],
+      'verified' => $posterUserData["IsVerified"],
       'profile_background_color' => 'cfe8f6',
       'geo_enabled' => true,
       'description' => '',
@@ -99,11 +99,11 @@ foreach($tweetsDB as $tweet){
       'statuses_count' => 0,
       'profile_background_image_url' => '',
       'following' => false,
-      'screen_name' => $postersUserData[$tweet["PosterUserID"]]["FullName"],
+      'screen_name' => $posterUserData["FullName"],
     ),
     'source' => 'ios app',
     'in_reply_to_status_id' => NULL,
   );
 }
 
-die(json_encode($tweetsResponse));
+die(json_encode($tweets));

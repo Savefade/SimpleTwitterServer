@@ -1,10 +1,10 @@
 <?php
-include  "../../Config/Maintenance.php";
-include  "../../Config/DatabaseConnection.php";
-include "../../Config/Users.php";
-include "../../Library/LoginFunctions.php";
+include  "../../../Config/Maintenance.php";
+include  "../../../Config/DatabaseConnection.php";
+include "../../../Config/Users.php";
+include "../../../Library/LoginFunctions.php";
 
-if(!isset($_POST["password"]) || !isset($_POST["screen_name"]) || !isset($_POST["email"]) || !isset($_POST["fullname"]) || !$isRegistrationEnabled){
+if(!isset($_POST["password"]) || !isset($_POST["screen_name"]) || !isset($_POST["email"]) || !isset($_POST["name"]) || !$isRegistrationEnabled){
 	exit(-1);
 }
 
@@ -21,7 +21,7 @@ $salt = sha1(rand(0, 2147000000));
 $lowerCaseUsername = strtolower($_POST["screen_name"]);
 $password = password_hash($salt . $_POST["password"] . $salt, PASSWORD_BCRYPT);
 
-RegisterNewAccount($lowerCaseUsername, $_POST["fullname"], $_POST["email"], $password, $salt, $token);
+RegisterNewAccount($lowerCaseUsername, $_POST["name"], $_POST["email"], $password, $salt, $token);
 
 header("X-Twitter-New-Account-Oauth-Access-Token: $token");
 header("X-Twitter-New-Account-Oauth-Secret: $token");

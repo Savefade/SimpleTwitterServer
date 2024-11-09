@@ -1,7 +1,6 @@
 <?php
 include  "../../../Config/Maintenance.php";
 include  "../../../Config/DatabaseConnection.php";
-include  "../../../Library/LoginFunctions.php";
 include  "../../../Library/Middleware.php";
 
 $getUserData = checkAuth();
@@ -18,13 +17,13 @@ die(json_encode(array(
     "following"=> null,
     "friends_count"=> 0,
     "geo_enabled"=> true,
-    "id"=> $DBData["ID"],
-    "id_str"=> $DBData["ID"],
+    "id"=> $getUserData["ID"],
+    "id_str"=> $getUserData["ID"],
     "is_translator"=> false,
     "lang"=> "en",
     "listed_count"=> 0,
     "location"=> "",
-    "name"=> $DBData["Username"], //not yet
+    "name"=> $getUserData["Username"], //not yet
     "notifications"=> null,
     "profile_background_color"=> "1A1B1F",
     "profile_background_image_url"=> "http=>//a0.twimg.com/profile_background_images/495742332/purty_wood.png",
@@ -38,7 +37,7 @@ die(json_encode(array(
     "profile_text_color"=> "123",
     "profile_use_background_image"=> true,
     "protected"=> false,
-    "screen_name"=> $DBData["Username"],
+    "screen_name"=> $getUserData["Username"],
     "show_all_inline_media"=> true,
     "status"=> [
     ],

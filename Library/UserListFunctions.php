@@ -3,9 +3,15 @@
 function getUsersByID($IDs){
 	include  "../../../Config/DatabaseConnection.php";
 	
-	$RetriveUsersData = $DBReq->prepare("SELECT * FROM accounts WHERE ID IN(?) ORDER BY FIELD(ID, ?);");
-	$RetriveUsersData->bind_param("ss", $IDs, $IDs);
-	$RetriveUsersData->execute();
+	$userData = array();
 	
-	return
+	$RetrieveUsersData = $DBReq->prepare("SELECT * FROM accounts WHERE ID IN($IDs) ORDER BY FIELD(ID, $IDs);");
+	$RetrieveUsersData->execute();
+	$DBResult = $RetrieveUsersData->get_result();
+	
+	while($user = mysqli_fetch_assoc($DBResult)){
+		$userData[$user["ID"]] = $user;
+	}
+	
+	return $userData;
 }
