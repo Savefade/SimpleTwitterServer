@@ -19,4 +19,18 @@ You can use the microblogging URL in the login page on iOS.
 
 # Credits
 - API Documentation: https://web.archive.org/web/20120419100225/https://dev.twitter.com/docs/api
-- 
+
+ # Alternatives/Rivals
+ - [https://github.com/Savefade/SimpleTwitterServer SimpleTwitterServer by SaveFade] - A private server rather than a bridge.
+
+## Compatibility
+**iOS:** Untested
+
+**Android:** Untested
+
+**Windows Phone:** Untested 
+
+**Windows 10 Desktop (UWP):** Untested, and UWP version of Instagram for Windows is lost media, only PWA (web app) can be downloaded due to MS Store not serving old versions.
+
+
+**watchOS:** Untested, lost?
